@@ -42,11 +42,26 @@ int _printf(const char *format, ...)
 				case 'r':
 					format_r(arg);
 					break;
+				case 'c':
+					format_c(arg);
+					break;
+				case 's':
+					format_s(arg);
+					break;
+				case 'b':
+					format_b(arg);
+					break;
+				case 'p':
+					format_p(arg);
+					break;
+				case 'R':
+					format_R(arg);
+					break;
 				default:
+					_putchar(*fmt);
 					break;
 			}
 	}
-
 	va_end(arg);
 	return (0);
 }
