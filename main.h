@@ -18,6 +18,7 @@ int format_X(va_list arg);
 int format_S(va_list arg);
 int format_u(va_list arg);
 int format_o(va_list arg);
+int format_r(va_list arg);
 int handle_flag(char *);
 int isPrintable(char c);
 char *convert(unsigned int num, int base);
