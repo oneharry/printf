@@ -25,7 +25,7 @@ int format_s(va_list arg)
 {
 	const char *str_value;
 
-	for (str_vale = va_arg(arg, char *); *str_value; str_value++)
+	for (str_value = va_arg(arg, char *); *str_value; str_value++)
 		putchar(*str_value);
 	return (0);
 }
