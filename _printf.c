@@ -9,7 +9,6 @@ int _printf(const char *format, ...)
 {
 	va_list arg;
 	const char *fmt;
-	unsigned int x;
 
 	va_start(arg, format);
 	for (fmt = format; *fmt != '\0'; fmt++)
@@ -19,7 +18,6 @@ int _printf(const char *format, ...)
 			_putchar(*fmt);
 			continue;
 		}
-		
 			switch (*++fmt)
 			{
 				case 'i':
@@ -41,9 +39,14 @@ int _printf(const char *format, ...)
 				case 'S':
 					format_S(arg);
 					break;
+				case 'r':
+					format_r(arg);
+					break;
+				default:
+					break;
 			}
 	}
-		
+
 	va_end(arg);
 	return (0);
 }

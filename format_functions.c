@@ -53,7 +53,7 @@ int format_o(va_list arg)
 /**
   * format_u - format unnsigned int
   * @arg: argument
-  * Return: returnint 
+  * Return: returnint
   */
 int format_u(va_list arg)
 {
@@ -71,6 +71,11 @@ int format_u(va_list arg)
 
 	return (0);
 }
+/**
+  * format_x - format for %x
+  * @arg: argument
+  * Return: 0
+  */
 int format_x(va_list arg)
 {
 	int x;
@@ -82,6 +87,11 @@ int format_x(va_list arg)
 
 	return (0);
 }
+/**
+  * format_X - formats for cap X
+  * @arg: variable argument
+  * Return: 0
+  */
 int format_X(va_list arg)
 {
 	unsigned int x, i;
@@ -95,58 +105,5 @@ int format_X(va_list arg)
 			*(str + i) = (*(str + i) + 32);
 		write(1, str, _strlen(str));
 	}
-	return (0);
-}
-int format_S(va_list arg)
-{
-	unsigned int i;
-	char *str, *s;
-
-	if (!isPrintable(*str))
-	{
-		s = convert(*str, 16);
-		write(1, UNPR, 3);
-		write(1, ZERO, 1);
-		write(1, s, _strlen(s));
-	} else
-	{
-		write(1, &(*str), 1);
-	}
-	return (0);
-}
-char *convert (unsigned int num, int base)
-{
-	static char Rep[] = "0123456789ABCDEF";
-	static char buf[50];
-	char *p;
-
-	p = &buf[49];
-	*p = '\0';
-
-	do
-	{
-		*--p = Rep[num % base];
-		num /= base;
-	} while (num != 0);
-
-	return (p);
-}
-/**
-  * isPrintable - checks if a char is a printbale char
-  * @c: char argument
-  * Return: char pointer
-  */
-int isPrintable(char c)
-{
-	if (c == '!' || c == '\"' || c == '#' || c == '$' || c == '%' ||
-			c == '&' || c == '\'' || c == '(' || c == ')' ||
-			c == '*' || c == '+' || c == ',' ||
-			c == '-' || c == '.' || c == '/' || c == ':' ||
-			c == ';' || c == '<' || c == '=' || c == '>' ||
-			c == '?' || c == '@' || c == '[' || c == '\\' ||
-			c == ']' || c == '^' || c == '`' || c == '{' ||
-			c == '}' || c == '|' || (c >= '0' && c <= 9) ||
-			(c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1);
 	return (0);
 }
