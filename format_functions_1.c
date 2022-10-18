@@ -15,7 +15,7 @@ int format_S(va_list arg)
 			s = convert(*str, 16);
 			write(1, UNPR, 3);
 			write(1, ZERO, 1);
-			write(1, s, _strlen(s));
+			write(1, s, strlen(s));
 		} else
 		{
 			write(1, &(*str), 1);
@@ -34,7 +34,7 @@ int format_r(va_list arg)
 	int len, x;
 
 	str = va_arg(arg, char *);
-	len = _strlen(str);
+	len = strlen(str);
 	for (x = len - 1; x >= 0; x--)
 	{
 		_putchar(str[x]);

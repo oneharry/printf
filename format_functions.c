@@ -6,30 +6,16 @@
   */
 int format_di(va_list arg)
 {
-	int x, hold, count;
+	int x;
+	char *str;
 
 	x = va_arg(arg, int);
-	if (x < 0)
-	{
-		_putchar('-');
-		x = x * -1;
-	} else
-	{
-		x = x;
-	}
-	hold = x;
-	count = 1;
-
-	while (hold > 9)
-	{
-		hold /= 10;
-		count *= 10;
-	}
-	while (count >= 1)
-	{
-		_putchar(((x / count) % 10) + '0');
-		count /= 10;
-	}
+	str = malloc(10);
+	if (str == NULL)
+		return (-1);
+	sprintf(str, "%d", x);
+	write(1, str, _strlen(str));
+	free(str);
 
 	return (0);
 }
@@ -41,12 +27,12 @@ int format_di(va_list arg)
   */
 int format_o(va_list arg)
 {
-	int x;
+	unsigned int x;
 	char *str;
 
-	x = va_arg(arg, int);
+	x = va_arg(arg, unsigned int);
 	str = (convert(x, 8));
-	write(1, str, _strlen(str));
+	write(1, str, strlen(str));
 	return (0);
 }
 
@@ -62,7 +48,9 @@ int format_u(va_list arg)
 
 	x = va_arg(arg, unsigned int);
 	str = malloc(10);
-	if (str != NULL)
+	if (str == NULL)
+		return (-1);
+	else
 	{
 		sprintf(str, "%u", x);
 		write(1, str, _strlen(str));
@@ -83,7 +71,7 @@ int format_x(va_list arg)
 
 	x = va_arg(arg, unsigned int);
 	str = (convert(x, 16));
-	write(1, str, _strlen(str));
+	write(1, str, strlen(str));
 
 	return (0);
 }
@@ -103,7 +91,7 @@ int format_X(va_list arg)
 	{
 		if (*(str + i) >= 'A' && *(str + i) <= 'F')
 			*(str + i) = (*(str + i) + 32);
-		write(1, str, _strlen(str));
+		write(1, str, strlen(str));
 	}
 	return (0);
 }
