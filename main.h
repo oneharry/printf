@@ -22,5 +22,10 @@ int format_r(va_list arg);
 int handle_flag(char *);
 int isPrintable(char c);
 char *convert(unsigned int num, int base);
+int format_c(va_list arg);
+int format_s(va_list arg);
+int format_b(va_list arg);
+int format_p(va_list arg);
+int format_R(va_list arg);
 
 #endif
