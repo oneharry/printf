@@ -63,6 +63,7 @@ char *convert(unsigned int num, int base)
 
 	return (p);
 }
+
 /**
   * isPrintable - checks if a char is a printbale char
   * @c: char argument
