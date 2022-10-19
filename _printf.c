@@ -9,12 +9,14 @@ int _printf(const char *format, ...)
 {
 	va_list arg;
 	const char *fmt;
+	unsigned int count = 0;
 
 	va_start(arg, format);
 	for (fmt = format; *fmt != '\0'; fmt++)
 	{
 		if (*fmt != '%')
 		{
+			count++;
 			_putchar(*fmt);
 			continue;
 		}
@@ -22,46 +24,27 @@ int _printf(const char *format, ...)
 			{
 				case 'i':
 				case 'd':
-					format_di(arg);
+					count += format_di(arg);
 					break;
 				case 'o':
-					format_o(arg);
+					count += format_o(arg);
 					break;
 				case 'u':
-					format_u(arg);
+					count += format_u(arg);
 					break;
 				case 'x':
-					format_x(arg);
+					count += format_x(arg);
 					break;
 				case 'X':
-					format_X(arg);
+					count += format_X(arg);
 					break;
 				case 'S':
-					format_S(arg);
-					break;
-				case 'r':
-					format_r(arg);
-					break;
-				case 'c':
-					format_c(arg);
-					break;
-				case 's':
-					format_s(arg);
-					break;
-				case 'b':
-					format_b(arg);
-					break;
-				case 'p':
-					format_p(arg);
-					break;
-				case 'R':
-					format_R(arg);
+					count += format_S(arg);
 					break;
 				default:
-					_putchar(*fmt);
 					break;
 			}
 	}
 	va_end(arg);
-	return (0);
+	return (count);
 }
