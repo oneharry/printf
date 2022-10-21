@@ -49,7 +49,7 @@ int _printf(const char *format, ...)
 					count += format_S(arg);
 					break;
 				default:
-					more_switch(arg, *fmt);
+					count += more_switch(arg, *fmt);
 					break;
 			}
 	}
