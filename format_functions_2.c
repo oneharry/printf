@@ -11,8 +11,15 @@ int format_c(va_list arg)
 	int int_value;
 
 	int_value = va_arg(arg, int);
-	printf("%c", int_value);
-	return (0);
+	if (int_value == 0)
+	{
+		return (-1);
+	}
+	else if (int_value != '\0')
+	{
+		_putchar(int_value);
+	}
+	return (int_value);
 }
 
 /**
@@ -21,13 +28,20 @@ int format_c(va_list arg)
  *
  * Return: returns the string arg
  */
-int format_s(va_list arg)
+char format_s(va_list arg)
 {
-	const char *str_value;
+	char *str_value;
 
 	for (str_value = va_arg(arg, char *); *str_value; str_value++)
-		putchar(*str_value);
-	return (0);
+		if (str_value == NULL)
+		{
+			printf("%s", "(null)");
+		}
+		else if (*str_value != '\0')
+		{
+			_putchar(*str_value);
+		}
+	return (*str_value);
 }
 
 /**
@@ -51,9 +65,9 @@ int format_b(va_list arg)
 	}
 	for (i = i - 1; i >= 0; i--)
 	{
-		printf("%d", a[i]);
+		_putchar(a[i]);
 	}
-	return (0);
+	return (a[i]);
 }
 
 /**
