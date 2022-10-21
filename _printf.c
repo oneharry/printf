@@ -9,6 +9,10 @@ int _printf(const char *format, ...)
 {
 	va_list arg;
 	const char *fmt;
+	
+	if (format == NULL)
+		return (-1);
+    
 	unsigned int count = 0;
 
 	va_start(arg, format);
@@ -39,6 +43,28 @@ int _printf(const char *format, ...)
 					count += format_X(arg);
 					break;
 				case 'S':
+					format_S(arg);
+					break;
+				case 'r':
+					format_r(arg);
+					break;
+				case 'c':
+					format_c(arg);
+					break;
+				case 's':
+					format_s(arg);
+					break;
+				case '%':
+					format_percent(arg);
+					break;
+				case 'b':
+					format_b(arg);
+					break;
+				case 'p':
+					format_p(arg);
+					break;
+				case 'R':
+					format_R(arg);
 					count += format_S(arg);
 					break;
 				default:
