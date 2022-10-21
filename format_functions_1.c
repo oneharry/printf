@@ -7,21 +7,25 @@
 int format_S(va_list arg)
 {
 	char *str, *s;
+	int count = 0;
 
 	for (str = va_arg(arg, char *); *str != '\0'; str++)
 	{
-		if (!isPrintable(*str))
+		if (isPrintable(*str))
 		{
+			_putchar('\\');
+			_putchar('x');
 			s = convert(*str, 16);
-			write(1, UNPR, 3);
-			write(1, ZERO, 1);
-			write(1, s, strlen(s));
+			_putchar('0');
+			_putchar(s[0]);
+			count += 4;
 		} else
 		{
-			write(1, &(*str), 1);
+			_putchar(*str);
+			count++;
 		}
 	}
-	return (0);
+	return (count);
 }
 /**
   * format_r - prints reverse of given arg
@@ -31,15 +35,16 @@ int format_S(va_list arg)
 int format_r(va_list arg)
 {
 	char *str;
-	int len, x;
+	int len, x, count;
 
 	str = va_arg(arg, char *);
 	len = strlen(str);
 	for (x = len - 1; x >= 0; x--)
 	{
 		_putchar(str[x]);
+		count++;
 	}
-	return (0);
+	return (count);
 }
 /**
   * convert - convert number to a base
@@ -71,15 +76,7 @@ char *convert(unsigned int num, int base)
   */
 int isPrintable(char c)
 {
-	if (c == '!' || c == '\"' || c == '#' || c == '$' || c == '%' ||
-			c == '&' || c == '\'' || c == '(' || c == ')' ||
-			c == '*' || c == '+' || c == ',' ||
-			c == '-' || c == '.' || c == '/' || c == ':' ||
-			c == ';' || c == '<' || c == '=' || c == '>' ||
-			c == '?' || c == '@' || c == '[' || c == '\\' ||
-			c == ']' || c == '^' || c == '`' || c == '{' ||
-			c == '}' || c == '|' || (c >= '0' && c <= 9) ||
-			(c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	if ((c >= 0 && c < 32) || c >= 127)
 		return (1);
 	return (0);
 }
