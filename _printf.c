@@ -12,12 +12,15 @@ int _printf(const char *format, ...)
 	
 	if (format == NULL)
 		return (-1);
+    
+	unsigned int count = 0;
 
 	va_start(arg, format);
 	for (fmt = format; *fmt != '\0'; fmt++)
 	{
 		if (*fmt != '%')
 		{
+			count++;
 			_putchar(*fmt);
 			continue;
 		}
@@ -25,19 +28,19 @@ int _printf(const char *format, ...)
 			{
 				case 'i':
 				case 'd':
-					format_di(arg);
+					count += format_di(arg);
 					break;
 				case 'o':
-					format_o(arg);
+					count += format_o(arg);
 					break;
 				case 'u':
-					format_u(arg);
+					count += format_u(arg);
 					break;
 				case 'x':
-					format_x(arg);
+					count += format_x(arg);
 					break;
 				case 'X':
-					format_X(arg);
+					count += format_X(arg);
 					break;
 				case 'S':
 					format_S(arg);
@@ -62,12 +65,12 @@ int _printf(const char *format, ...)
 					break;
 				case 'R':
 					format_R(arg);
+					count += format_S(arg);
 					break;
 				default:
-					_putchar(*fmt);
 					break;
 			}
 	}
 	va_end(arg);
-	return (0);
+	return (count);
 }

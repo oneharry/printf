@@ -6,13 +6,14 @@
   */
 int format_di(va_list arg)
 {
-	int x, hold, count;
+	int x, hold, count, num = 0;
 
 	x = va_arg(arg, int);
 	if (x < 0)
 	{
 		_putchar('-');
 		x = x * -1;
+		num++;
 	} else
 	{
 		x = x;
@@ -29,9 +30,10 @@ int format_di(va_list arg)
 	{
 		_putchar(((x / count) % 10) + '0');
 		count /= 10;
+		num++;
 	}
 
-	return (0);
+	return (num);
 }
 
 /**
@@ -41,13 +43,24 @@ int format_di(va_list arg)
   */
 int format_o(va_list arg)
 {
-	int x;
-	char *str;
+	unsigned int x, num = 0;
+	int a, b;
+	int octalNum[50];
 
-	x = va_arg(arg, int);
-	str = (convert(x, 8));
-	write(1, str, _strlen(str));
-	return (0);
+
+	x = va_arg(arg, unsigned int);
+	for (a = 0; x > 0; a++)
+	{
+		octalNum[a] = x % 8;
+		x = x / 8;
+	}
+	for (b = (a - 1); b >= 0; b--)
+	{
+		_putchar(octalNum[b] + '0');
+		num++;
+	}
+
+	return (num);
 }
 
 /**
@@ -57,53 +70,85 @@ int format_o(va_list arg)
   */
 int format_u(va_list arg)
 {
-	int x;
-	char *str;
+	unsigned int x, hold;
+	int count, num = 0;
 
 	x = va_arg(arg, unsigned int);
-	str = malloc(10);
-	if (str != NULL)
-	{
-		sprintf(str, "%u", x);
-		write(1, str, _strlen(str));
-		free(str);
-	}
+	hold = x;
+	count = 1;
 
-	return (0);
+	while (hold > 9)
+	{
+		hold /= 10;
+		count *= 10;
+	}
+	while (count >= 1)
+	{
+		_putchar(((x / count) % 10) + '0');
+		count /= 10;
+		num++;
+	}
+	return (num);
+
 }
 /**
-  * format_x - format for %x
-  * @arg: argument
-  * Return: 0
+  * format_x - formats hex
+  * @arg: arguments
+  * Return: number of characters printed
   */
 int format_x(va_list arg)
 {
-	int x;
-	char *str;
+	long remainder, x;
+	int a = 0;
+	int b, num = 0;
+	char hexa[100];
 
 	x = va_arg(arg, unsigned int);
-	str = (convert(x, 16));
-	write(1, str, _strlen(str));
+	while (x > 0)
+	{
+		remainder = x % 16;
+		if (remainder < 10)
+			hexa[a++] = remainder + 48;
+		else
+			hexa[a++] = remainder + 87;
+		x = x / 16;
+	}
 
-	return (0);
+	for (b = a; b >= 0; b--)
+	{
+		_putchar(hexa[b]);
+		num++;
+	}
+	return (num);
 }
 /**
-  * format_X - formats for cap X
-  * @arg: variable argument
-  * Return: 0
+  * format_X - formats for cap HEX
+  * @arg: argument
+  * Return: returns number of character printed
   */
 int format_X(va_list arg)
 {
-	unsigned int x, i;
-	char *str;
+	long remainder, x;
+	int a = 0;
+	int b, num = 0;
+	char hexa[100];
 
 	x = va_arg(arg, unsigned int);
-	str = (convert(x, 16));
-	for (i = 0; *(str + i); i++)
+	while (x > 0)
 	{
-		if (*(str + i) >= 'A' && *(str + i) <= 'F')
-			*(str + i) = (*(str + i) + 32);
-		write(1, str, _strlen(str));
+		remainder = x % 16;
+		if (remainder < 10)
+			hexa[a++] = remainder + 48;
+		else
+			hexa[a++] = remainder + 55;
+		x = x / 16;
 	}
-	return (0);
+
+	for (b = a; b >= 0; b--)
+	{
+		_putchar(hexa[b]);
+		num++;
+	}
+
+	return (num);
 }
