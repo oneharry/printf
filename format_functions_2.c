@@ -4,44 +4,32 @@
  * format_c - formats the specifier c
  *@arg: argument
  *
- * Return: returns the character arg
+ * Return: returns the number of character printed
  */
 int format_c(va_list arg)
 {
-	int int_value;
-
-	int_value = va_arg(arg, int);
-	if (int_value == 0)
-	{
-		return (-1);
-	}
-	else if (int_value != '\0')
-	{
-		_putchar(int_value);
-	}
-	return (int_value);
+	_putchar(va_arg(arg, int));
+	return (1);
 }
 
 /**
  * format_s - formats the specifier s
  *@arg: argument
  *
- * Return: returns the string arg
+ * Return: returns the number of chaacters printed
  */
-char format_s(va_list arg)
+int format_s(va_list arg)
 {
 	char *str_value;
+	int i;
+	
+	str_value = va_arg(arg, char *);
 
-	for (str_value = va_arg(arg, char *); *str_value; str_value++)
-		if (str_value == NULL)
-		{
-			printf("%s", "(null)");
-		}
-		else if (*str_value != '\0')
-		{
-			_putchar(*str_value);
-		}
-	return (*str_value);
+	if (str_value == NULL)
+		str_value = "(null)";
+	for (i = 0; str_value[i] != '\0'; str_value++)
+		_putchar(str_value[i]);
+	return (i);
 }
 
 /**
@@ -67,7 +55,7 @@ int format_b(va_list arg)
 	{
 		_putchar(a[i]);
 	}
-	return (a[i]);
+	return (i);
 }
 
 /**

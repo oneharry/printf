@@ -9,6 +9,9 @@ int _printf(const char *format, ...)
 {
 	va_list arg;
 	const char *fmt;
+	
+	if (format == NULL)
+		return (-1);
 
 	va_start(arg, format);
 	for (fmt = format; *fmt != '\0'; fmt++)
@@ -47,6 +50,9 @@ int _printf(const char *format, ...)
 					break;
 				case 's':
 					format_s(arg);
+					break;
+				case '%':
+					format_percent(arg);
 					break;
 				case 'b':
 					format_b(arg);
