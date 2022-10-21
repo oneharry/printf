@@ -43,25 +43,25 @@ int _printf(const char *format, ...)
 					count += format_S(arg);
 					break;
 				case 'r':
-					format_r(arg);
+					count += format_r(arg);
 					break;
 				case 'c':
-					format_c(arg);
+					count += format_c(arg);
 					break;
 				case 's':
-					format_s(arg);
+					count += format_s(arg);
 					break;
 				case '%':
-					format_percent(arg);
+					count += format_percent(arg);
 					break;
 				case 'b':
-					format_b(arg);
+					count += format_b(arg);
 					break;
 				case 'p':
-					format_p(arg);
+					count += format_p(arg);
 					break;
 				case 'R':
-					format_R(arg);
+					count += format_R(arg);
 					break;
 				default:
 					break;
